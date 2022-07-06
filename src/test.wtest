@@ -1,0 +1,56 @@
+import planeta.*
+import habitantes.*
+
+describe "habitantesConDiezInteligencia()" {
+	const julieta = new Persona(edad = 42)
+	const ana = new Atleta(edad = 25)
+	const rosa = new Atleta(edad = 45, cantTecnicas= 8)
+	const perla = new Atleta(edad = 28, cantTecnicas=4, masaMuscular= 6)
+	const monica = new Docente(edad = 45, cantCursos= 6)
+	const luisa = new Docente(edad = 35, cantCursos=1)
+	const triton = new Planeta(habitantes = #{julieta, ana, rosa, perla, monica, luisa}, cantMuseos = 0, murallas = 0)
+		
+		
+	test "Julieta" {
+	assert.equals(20, julieta.potencia())	
+	assert.equals(8, julieta.inteligencia())
+	assert.notThat(julieta.esDestacado())	
+	}	
+	
+	test "Ana" {
+	assert.equals(28, ana.potencia())	
+	assert.equals(12, ana.inteligencia())
+	assert.that(ana.esDestacado())	
+	}
+	
+	test "Rosa" {
+	assert.equals(52, rosa.potencia())	
+	assert.equals(8, rosa.inteligencia())
+	assert.that(rosa.esDestacado())	
+	}
+	
+	test "Perla" {
+	assert.equals(44, perla.potencia())	
+	assert.equals(12, perla.inteligencia())
+	assert.notThat(perla.esDestacado())	
+	}
+	
+	test "Monica" {
+	assert.equals(20, monica.potencia())	
+	assert.equals(20, monica.inteligencia())
+	assert.that(monica.esDestacado())	
+	}
+	
+	test "Luisa" {
+	assert.equals(20, luisa.potencia())	
+	assert.equals(14, luisa.inteligencia())
+	assert.notThat(luisa.esDestacado())	
+	}
+	
+	test"la delegación diplomática está formada por Ana, Rosa y Mónica"{
+			assert.that(triton.delegacionDiplomatica() == #{ana, rosa, monica})
+			assert.equals(2, triton.valorInicial())	
+			assert.notThat(triton.esCulto())
+			assert.equals(184, triton.potenciaReal())
+	}
+}
