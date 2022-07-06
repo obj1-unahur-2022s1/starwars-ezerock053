@@ -10,6 +10,7 @@ class Persona {
 	}
 	method esDestacado()= edad == 25 || edad == 35
 	method valor() = self.potencia() + self.inteligencia()
+	method darTributoA(unPlaneta){}
 	
 		
 }
@@ -21,13 +22,16 @@ class Atleta inherits Persona {
 	override method potencia() = todasLasPersonas.condicionComun() + masaMuscular * cantTecnicas
 	override method esDestacado() = todasLasPersonas.condicionComun() and cantTecnicas > 5
 	method entrenar(dias) {
-		if(dias == 5) {
-			masaMuscular += 1	
+		if(dias%5 == 0) {
+			masaMuscular += dias/5
 		}
 	}
 	method aprenderTecnica(){
 		cantTecnicas += 1
 	} 
+	override method darTributoA(unPlaneta) {
+		unPlaneta.construirMurallas(2)
+		}
 }
 
 class Docente inherits Persona {
@@ -36,6 +40,9 @@ class Docente inherits Persona {
 	override method inteligencia() = todasLasPersonas.condicionComun() + cantCursos *2
 	override method esDestacado() = false
 	override method valor() = super() + 5 
+	override method darTributoA(unaCiudad) {
+		unaCiudad.fundarMuseo()
+		}
 }
 
 object todasLasPersonas {
@@ -46,7 +53,9 @@ class Soldado inherits Persona {
 	var property armas = []
 	
 	override method potencia() = todasLasPersonas.condicionComun() + armas.sum{a => a.potenciaQueOtorga()}
-	method tributoQueOfrece(unaCiudad) = unaCiudad.construirMurallas(5)
+	override method darTributoA(unaCiudad){
+		unaCiudad.construirMurallas(5)
+		}
 }
 
 class Pistolete {

@@ -17,14 +17,9 @@ class Planeta {
 	method potenciaAparente() = habitantes.max({h => h.potencia()}) * self.cantidadDeHabitantes()
 	method cantidadDeHabitantes() = habitantes.size()
 	method necesitaReforzar() = self.potenciaAparente() > self.potenciaReal() *2
-	method recibirTributoDocente() {
-		self.fundarMuseo()
-	}
-	method recibirTributoAtleta() {
-		return self.construirMurallas(2)
-	}
+	method recibirTributo() = habitantes.forEach({h => h.darTributoA(self)})
 	method habitantesValiosos() = habitantes.filter{ h => h.valor()>= 40
 	}
-	method apaciguarA(otroPlaneta) = self.habitantesValiosos()
+	method apaciguarA(otroPlaneta) = self.habitantesValiosos().forEach({ h => h.darTributoA(otroPlaneta)})
 	
 }
