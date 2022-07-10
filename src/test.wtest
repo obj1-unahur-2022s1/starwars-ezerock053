@@ -1,3 +1,13 @@
+/*
+ * 1) Falta el test de perla que pedía: 
+ * en un test aparte, hacer que Perla entrene 15 días y aprenda una técnica. 
+ * Después de eso, la potencia tiene que ser 65, y todavía no tiene que ser destacada. 
+ * Después hacer que aprenda una técnica más. Después de aprender esta segunda 
+ * técnica adicional, Perla tiene que ser destacada.
+ * Te dejo la solución en el código.
+ * 2) Y faltan realizar algunos test sobre planetas.
+ */
+
 import planeta.*
 import habitantes.*
 
@@ -52,5 +62,19 @@ describe "habitantesConDiezInteligencia()" {
 			assert.equals(2, triton.valorInicial())	
 			assert.notThat(triton.esCulto())
 			assert.equals(184, triton.potenciaReal())
+	}
+	
+	test "Perla entrena y aprende tecnica, no es destacada y potencia 65"{
+		perla.entrenar(15)
+		perla.aprenderTecnica()
+		assert.equals(65,perla.potencia())
+		assert.notThat(perla.esDestacado())
+	}
+	
+	test "Perla aprende nueva tecnica, ahora es destacada"{
+		perla.entrenar(15)
+		perla.aprenderTecnica()
+		perla.aprenderTecnica()
+		assert.that(perla.esDestacado())
 	}
 }
